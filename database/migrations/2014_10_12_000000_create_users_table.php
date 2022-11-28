@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('personal_phone_number');
             $table->string('bussiness_phone_number');
+            $table->enum('role', ['CEO', 'Moderator', 'Member'])->default('Member');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

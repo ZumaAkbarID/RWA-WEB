@@ -14,4 +14,11 @@ class B_Main extends Controller
             'title' => 'Rahmat Wahyuma Akbar Blog'
         ]);
     }
+
+    public function under_construction()
+    {
+        return view('Blog.under-construction', [
+            'title' => 'Blog Under Construction'
+        ]);
+    }
 }
