@@ -26,13 +26,14 @@
         <div class="control" data-id="portfolio">
             <i class="fas fa-briefcase"></i>
         </div>
-        <a href="{{ route('Blog_index') }}">
-            <div class="control">
-                <i class="far fa-newspaper"></i>
-            </div>
-        </a>
+        <div class="control" onclick="redirectBlog()">
+            <i class="far fa-newspaper"></i>
+        </div>
         <div class="control" data-id="contact">
             <i class="fas fa-envelope-open"></i>
+        </div>
+        <div class="control" onclick="reload()" title="Reload Website">
+            <i class="fas fa-redo"></i>
         </div>
     </div>
     <div class="theme-btn">
@@ -40,5 +41,14 @@
     </div>
 
     <script src="{{ asset('/storage') }}/main/js/app.js"></script>
+    <script>
+        function reload() {
+            location.reload();
+        }
+
+        function redirectBlog() {
+            location.href= "{{ route('Blog_index') }}"
+        }
+    </script>
 </body>
 </html>

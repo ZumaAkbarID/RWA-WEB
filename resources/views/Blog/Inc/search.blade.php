@@ -5,9 +5,9 @@
           <button class="tm-search-button rounded" type="submit">
               <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
           </button>                                
-          <button class="tm-search-button ml-3 rounded" type="submit">
+          {{-- <button class="tm-search-button ml-3 rounded" type="submit">
             <i class="fas fa-undo tm-search-icon" aria-hidden="true"></i>
-          </button>                                
+          </button>                                 --}}
       </form>
   </div>                
 </div> 

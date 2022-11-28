@@ -4,8 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class incrementVistor
+class incrementVisitor
 {
     /**
      * Handle an incoming request.
@@ -16,6 +17,9 @@ class incrementVistor
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!Auth::check() || Auth::user()->role !== 'CEO') {
+            visitor()->visit();
+        }
         return $next($request);
     }
 }

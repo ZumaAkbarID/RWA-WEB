@@ -17,9 +17,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/storage') }}/assets/img/favicon.png">
     <!-- Custom CSS -->
     <link href="{{ asset('/storage') }}/admin/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="{{ asset('/storage') }}/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <link href="{{ asset('/storage') }}/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.0/sweetalert2.min.css"
+        integrity="sha512-y6TjkITSFkRB9mZmDaJyDOsyHsYvOo3Np3iAKe02HgMDP4L4vbmbhlzNpbbIVC1x+GUUHvepTd1BKDe4kC6kNg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link href="{{ asset('/storage') }}/admin/dist/css/style.min.css" rel="stylesheet">
+    @yield('admin_css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -52,22 +57,26 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="{{ url('/admin') }}">
+                    <a class="navbar-brand" href="{{ route('Admin_index') }}">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{ asset('/storage') }}/assets/img/logo-icon.png" alt="homepage" class="dark-logo" width="50" width="31"/>
+                            <img src="{{ asset('/storage') }}/assets/img/logo-icon.png" alt="homepage" class="dark-logo"
+                                width="50" width="31" />
                             <!-- Light Logo icon -->
-                            <img src="{{ asset('/storage') }}/assets/img/logo-light-icon.png" alt="homepage" class="light-logo" width="50" width="31"/>
+                            <img src="{{ asset('/storage') }}/assets/img/logo-light-icon.png" alt="homepage"
+                                class="light-logo" width="50" width="31" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{{ asset('/storage') }}/assets/img/logo-text.png" alt="homepage" class="dark-logo" width="150" width="50"/>
+                            <img src="{{ asset('/storage') }}/assets/img/logo-text.png" alt="homepage" class="dark-logo"
+                                width="150" width="50" />
                             <!-- Light Logo text -->
-                            <img src="{{ asset('/storage') }}/assets/img/logo-light-text.png" class="light-logo" alt="homepage" width="150" width="50"/>
+                            <img src="{{ asset('/storage') }}/assets/img/logo-light-text.png" class="light-logo"
+                                alt="homepage" width="150" width="50" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -88,13 +97,13 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
+                        {{-- <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="mdi mdi-magnify me-1"></i> <span class="font-16">Search</span></a>
                             <form class="app-search position-absolute">
                                 <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
                                     class="srh-btn"><i class="mdi mdi-window-close"></i></a>
                             </form>
-                        </li>
+                        </li> --}}
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -104,17 +113,19 @@
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('/storage') }}/admin/assets/images/users/profile.png" alt="user" class="rounded-circle" width="31">
+                            <a class="disabled" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset('/storage') }}/admin/assets/images/users/profile.png" alt="user"
+                                    class="rounded-circle" width="31">
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+                            {{-- <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i>
                                     My Profile</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
                                     My Balance</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
                                     Inbox</a>
-                            </ul>
+                            </ul> --}}
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -135,27 +146,50 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item selected"> <a class="sidebar-link waves-effect waves-dark sidebar-link active"
-                                href="index.html" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="pages-profile.html" aria-expanded="false"><i
-                                    class="mdi mdi-account-network"></i><span class="hide-menu">Profile</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="table-basic.html" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
-                                    class="hide-menu">Table</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
-                                    class="hide-menu">Icon</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="starter-kit.html" aria-expanded="false"><i class="mdi mdi-file"></i><span
-                                    class="hide-menu">Blank</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="error-404.html" aria-expanded="false"><i class="mdi mdi-alert-outline"></i><span
-                                    class="hide-menu">404</span></a></li>
+                        <li class="sidebar-item @if (Request::segment(1) == 'admin' && is_null(Request::segment(2))) selected @endif">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link @if (Request::segment(1) == 'admin' && is_null(Request::segment(2))) active @endif"
+                                href="{{ route('Admin_index') }}" aria-expanded="false">
+                                <i class="mdi mdi-view-dashboard"></i>
+                                <span class="hide-menu">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item @if (Request::segment(2) == 'blog') selected @endif">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link @if (Request::segment(2) == 'blog') active @endif"
+                                href="{{ route('Admin_blog_index') }}" aria-expanded="false">
+                                <i class="mdi mdi-blogger"></i>
+                                <span class="hide-menu">Blog</span></a>
+                        </li>
+                        <li class="sidebar-item @if (Request::segment(2) == 'mail-notifier') selected @endif">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link @if (Request::segment(2) == 'mail-notifier') active @endif"
+                                href="{{ route('Admin_mail_notifier_index') }}" aria-expanded="false">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span class="hide-menu">Mail Notifier</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html"
+                                aria-expanded="false">
+                                <i class="mdi mdi-face"></i>
+                                <span class="hide-menu">Icon</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="starter-kit.html"
+                                aria-expanded="false">
+                                <i class="mdi mdi-file"></i>
+                                <span class="hide-menu">Blank</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="error-404.html"
+                                aria-expanded="false">
+                                <i class="mdi mdi-alert-outline"></i>
+                                <span class="hide-menu">404</span>
+                            </a>
+                        </li>
                         <li class="text-center p-40 upgrade-btn">
-                            <a href="https://www.wrappixel.com/templates/flexy-bootstrap-admin-template/"
-                                class="btn d-block w-100 btn-danger text-white" target="_blank">Upgrade to Pro</a>
+                            <a href="{{ route('Auth_logout') }}"
+                                class="btn d-block w-100 btn-danger text-white">Logout</a>
                         </li>
                     </ul>
 
@@ -174,25 +208,7 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
-            <div class="page-breadcrumb">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0 d-flex align-items-center">
-                              <li class="breadcrumb-item"><a href="index.html" class="link"><i class="mdi mdi-home-outline fs-4"></i></a></li>
-                              <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                            </ol>
-                          </nav>
-                        <h1 class="mb-0 fw-bold">Dashboard</h1> 
-                    </div>
-                    <div class="col-6">
-                        <div class="text-end upgrade-btn">
-                            <a href="https://www.wrappixel.com/templates/flexy-bootstrap-admin-template/" class="btn btn-primary text-white"
-                                target="_blank">Upgrade to Pro</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @yield('admin_breadcrumb')
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
@@ -220,18 +236,23 @@
     <!-- ============================================================== -->
     <script src="{{ asset('/storage') }}/admin/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('/storage') }}/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/storage') }}/admin/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('/storage') }}/admin/dist/js/app-style-switcher.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.6.0/sweetalert2.min.js"
+        integrity="sha512-STirfWdXti4sBdx8qNLvlPU6G008ynF4TcZkLd0hOsM6PkZM3PbWbAoe4tO0nAu92S/HfE/XK1N4SwDzai9xDg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--Wave Effects -->
     <script src="{{ asset('/storage') }}/admin/dist/js/waves.js"></script>
     <!--Menu sidebar -->
     {{-- <script src="{{ asset('/storage') }}/admin/dist/js/sidebarmenu.js"></script> --}}
     <!--Custom JavaScript -->
     <script src="{{ asset('/storage') }}/admin/dist/js/custom.js"></script>
+    @yield('admin_js')
     <!--This page JavaScript -->
     <!--chartis chart-->
     <script src="{{ asset('/storage') }}/admin/assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="{{ asset('/storage') }}/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="{{ asset('/storage') }}/admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js">
+    </script>
     <script src="{{ asset('/storage') }}/admin/dist/js/pages/dashboards/dashboard1.js"></script>
 </body>
 

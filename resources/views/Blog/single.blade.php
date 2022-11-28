@@ -8,74 +8,72 @@
   <div class="row tm-row">
       <div class="col-12">
           <hr class="tm-hr-primary tm-mb-55">
-          <!-- Video player 1422x800 -->
-          <video width="954" height="535" controls class="tm-mb-40">
-              <source src="{{ asset('/storage') }}/blog/video/wheat-field.mp4" type="video/mp4">							  
-              Your browser does not support the video tag.
-          </video>
+          <img src="{{ asset('/storage') }}/{{ $post->media }}" width="1320" height="535" class="tm-mb-40 tm-img-fluid" alt="{{ $post->title }} - Image">
       </div>
   </div>
   <div class="row tm-row">
       <div class="col-lg-8 tm-post-col">
           <div class="tm-post-full">                    
               <div class="mb-4">
-                  <h2 class="pt-2 tm-color-primary tm-post-title">Single Post of Xtra Blog HTML Template</h2>
-                  <p class="tm-mb-40">June 16, 2020 posted by Admin Nat</p>
-                  <p>
-                      This is a description of the video post. You can also have an image instead of
-                      the video. You can free download 
-                      <a rel="nofollow" href="https://templatemo.com/tm-553-xtra-blog" target="_blank">Xtra Blog Template</a> 
-                      from TemplateMo website. Phasellus maximus quis est sit amet maximus. Vestibulum vel rutrum
-                      lorem, ac sodales augue. Aliquam erat volutpat. Duis lectus orci, blandit in arcu
-                      est, elementum tincidunt lectus. Praesent vel justo tempor, varius lacus a,
-              pharetra lacus. </p>
-                  <p>
-                      Duis pretium efficitur nunc. Mauris vehicula nibh nisi. Curabitur gravida neque
-                      dignissim, aliquet nulla sed, condimentum nulla. Pellentesque id venenatis
-                      quam, id cursus velit. Fusce semper tortor ac metus iaculis varius. Praesent
-                      aliquam ex vel lectus ornare tristique. Nunc et eros quis enim feugiat tincidunt
-                      et vitae dui.
-                  </p>
-                  <span class="d-block text-right tm-color-primary">Creative . Design . Business</span>
+                  <h2 class="pt-2 tm-color-primary tm-post-title">{{ $post->title }}</h2>
+                  <p class="tm-mb-40">{{ date('H:i:s d M, Y', strtotime($post->created_at)) . ' posted by ' }} <a href="{{ route('author_profile', $author->username) }}">{{  $author->name }}</a> @if(strtotime($post->created_at) !== strtotime($post->updated_at)) modified at {{ date('H:i:s d M, Y', strtotime($post->updated_at)) }} @endif</p>
+                  
+                    {!! $post->content !!}
+
+                  <span class="d-block text-right tm-color-primary">
+                    Tags : 
+                    @forelse ($tags as $item)
+                        <a href="{{ route('Blog_tag', $item['slug']) }}">{{ $item['tag'] }}</a>,
+                        @empty
+                        No Tag
+                    @endforelse
+                  </span>
               </div>
               
               <!-- Comments -->
               <div>
                   <h2 class="tm-color-primary tm-post-title">Comments</h2>
                   <hr class="tm-hr-primary tm-mb-45">
-                  <div class="tm-comment tm-mb-45">
-                      <figure class="tm-comment-figure">
-                          <img src="{{ asset('/storage') }}/blog/img/comment-1.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
-                          <figcaption class="tm-color-primary text-center">Mark Sonny</figcaption>
-                      </figure>
-                      <div>
-                          <p>
-                              Praesent aliquam ex vel lectus ornare tritique. Nunc et eros
-                              quis enim feugiat tincidunt et vitae dui. Nullam consectetur
-                              justo ac ex laoreet rhoncus. Nunc id leo pretium, faucibus 
-                              sapien vel, euismod turpis.
-                          </p>
-                          <div class="d-flex justify-content-between">
-                              <a href="#" class="tm-color-primary">REPLY</a>
-                              <span class="tm-color-primary">June 14, 2020</span>
-                          </div>                                                 
-                      </div>                                
-                  </div>
-                  <div class="tm-comment-reply tm-mb-45">
-                      <hr>
-                      <div class="tm-comment">
-                          <figure class="tm-comment-figure">
-                              <img src="{{ asset('/storage') }}/blog/img/comment-2.jpg" alt="Image" class="mb-2 rounded-circle img-thumbnail">
-                              <figcaption class="tm-color-primary text-center">Jewel Soft</figcaption>    
-                          </figure>
-                          <p>
-                              Nunc et eros quis enim feugiat tincidunt et vitae dui.
-                              Nullam consectetur justo ac ex laoreet rhoncus. Nunc
-                              id leo pretium, faucibus sapien vel, euismod turpis.
-                          </p>
-                      </div>                                
-                      <span class="d-block text-right tm-color-primary">June 21, 2020</span>
-                  </div>
+
+                  @forelse ($comments as $item)
+                    <div class="tm-comment tm-mb-45">
+                        <figure class="tm-comment-figure">
+                            <img src="{{ asset('/storage') }}/blog/img/user.png" alt="Image" width="100" height="100" class="mb-2 rounded-circle img-thumbnail">
+                            <figcaption class="tm-color-primary text-center">{{ $item->name }}</figcaption>
+                        </figure>
+                        <div>
+                            <p>
+                                {{ $item->content }}
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                @if (Auth::user()->id == $author->id)
+                                    <a href="/dashboard/post/reply?id={{ $item->id }}" class="tm-color-primary" style="margin-right: 20px;">REPLY</a>
+                                @endif
+                                <span class="tm-color-primary">{{ date('H:i:s d M, Y', strtotime($item->created_at)) }}</span>
+                            </div>                                                 
+                        </div>                                
+                    </div>
+
+                    @if ($item->repplied == 'yes')
+                    <div class="tm-comment-reply tm-mb-45">
+                        <hr>
+                        <div class="tm-comment">
+                            <figure class="tm-comment-figure">
+                                <img src="{{ asset('/storage') }}/blog/img/user.png" width="100" height="100" alt="Image" class="mb-2 rounded-circle img-thumbnail">
+                                <figcaption class="tm-color-primary text-center">{{ $author->name }}</figcaption>    
+                            </figure>
+                            <p>
+                                {{ $item->reply_content }}
+                            </p>
+                        </div>                                
+                        <span class="d-block text-right tm-color-primary">{{ date('H:i:s d M, Y', strtotime($item->updated_at)) }}</span>
+                    </div>
+                    @endif
+                    
+                  @empty
+                      No comment found <br><br><br>
+                  @endforelse
+                  
                   <form action="" class="mb-5 tm-comment-form">
                       <h2 class="tm-color-primary tm-post-title mb-4">Comment on this post</h2>
                       <div class="mb-4">
@@ -99,12 +97,11 @@
               <hr class="mb-3 tm-hr-primary">
               <h2 class="mb-4 tm-post-title tm-color-primary">Categories</h2>
               <ul class="tm-mb-75 pl-5 tm-category-list">
-                  <li><a href="#" class="tm-color-primary">Visual Designs</a></li>
-                  <li><a href="#" class="tm-color-primary">Travel Events</a></li>
-                  <li><a href="#" class="tm-color-primary">Web Development</a></li>
-                  <li><a href="#" class="tm-color-primary">Video and Audio</a></li>
-                  <li><a href="#" class="tm-color-primary">Etiam auctor ac arcu</a></li>
-                  <li><a href="#" class="tm-color-primary">Sed im justo diam</a></li>
+                @forelse ($allTag as $item)
+                    <li><a href="{{ route('Blog_tag', $item->slug) }}" class="tm-color-primary">{{ $item->tag }}</a></li>
+                    @empty
+                    No Tag
+                @endforelse
               </ul>
               <hr class="mb-3 tm-hr-primary">
               <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>

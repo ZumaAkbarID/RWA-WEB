@@ -8,13 +8,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
     <link href="{{ asset('/storage') }}/blog/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('/storage') }}/blog/css/xtra-blog.css" rel="stylesheet">
-<!--
-    
-TemplateMo 553 Xtra Blog
 
-https://templatemo.com/tm-553-xtra-blog
-
--->
 </head>
 <body>
 	<header class="tm-header" id="tm-header">
